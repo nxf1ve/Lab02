@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace Lab02
 {
@@ -76,8 +77,56 @@ namespace Lab02
 
             return new string(lcs);
         }
+        static void InsertSort(int[] array)
+        {
+            for (int pos=1; pos < array.Length; pos++)
+            {
+                int key = array[pos];
+                int i = pos - 1;
+                while (i >= 0 && (array[i] > key)) 
+                {
+                    array[i+1] = array[i];
+                    i--;
+                }
+                array[i + 1] = key;
+            }
+        }
+        public static int LinearSearch(int[] array, int target)
+        {
+            for (int i = 0; i < array.Length; i++)
+            {
+                if (array[i] == target) return i;
+            }
+            return -1;
+        }
+        public static int BinarySearch(int[] array, int target)
+        {
+            int left = 0;
+            int right = array.Length - 1;
+            while (left <= right)
+            {
+                int mid = left + (right - left) / 2;
+                if (array[mid] == target)
+                    return mid;
+                else if (array[mid] > target)
+                    right = mid - 1;
+                else 
+                    left = mid + 1;
+            }
+            return -1;
+        }
+        static void PrintArray(int[] array)
+        {
+            foreach (int i in array)
+            {
+                Console.Write(i + " ");
+            }
+            Console.WriteLine();
+        }
         static void Main(string[] args)
         {
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();
             List<int> coins = new List<int> { 1, 2, 5, 10, 20, 50, 100, 200 }; // Доступные номиналы монет
             Console.WriteLine("Введите сумму денег, которую нужно рассчитать в монетах: ");
             int amount = Convert.ToInt32(Console.ReadLine());
@@ -91,15 +140,24 @@ namespace Lab02
                     Console.WriteLine($"{coins[i]} руб.: {change[i]} монет");
             }
 
-            string str1 = "GXTXAYB";
-            string str2 = "AGGTAB";
-
-            string lcs = LongestCommonSubsequence(str1, str2);
-            Console.WriteLine("====================================");
-            Console.WriteLine($"Наибольшая общая последовательность: {lcs}");
+            //string str1 = "GXTXAYB";
+            //string str2 = "AGGTAB";
 
 
+            //string lcs = LongestCommonSubsequence(str1, str2);
+            //Console.WriteLine("====================================");
+            //Console.WriteLine($"Наибольшая общая последовательность: {lcs}");
 
+            stopwatch.Stop();
+            TimeSpan elapsedTime = stopwatch.Elapsed;
+            Console.WriteLine("Прошедшее время: " + elapsedTime);
+            //int[] array = new int[5] { 6, 1, 12, 41, 2 };
+            //PrintArray(array);
+            //InsertSort(array);
+
+            //PrintArray(array);
+            //Console.WriteLine(LinearSearch(array, 12));
+            //Console.WriteLine(BinarySearch(array, 1));
             Console.ReadKey();
         }
     }
