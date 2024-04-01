@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Runtime.InteropServices;
+using System.Text;
 
 namespace Lab02
 {
@@ -123,6 +125,17 @@ namespace Lab02
             }
             Console.WriteLine();
         }
+        static string GenerateRandomString(int length)
+        {
+            Random rnd = new Random();
+            string letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            StringBuilder sb = new StringBuilder(length);
+            for (int i=0; i < length; i++)
+            {
+                sb.Append(letters[rnd.Next(letters.Length)]);
+            }
+            return sb.ToString();
+        }
         static void Main(string[] args)
         {
             Stopwatch stopwatch = new Stopwatch();
@@ -139,18 +152,19 @@ namespace Lab02
                 if (change[i] > 0)
                     Console.WriteLine($"{coins[i]} руб.: {change[i]} монет");
             }
-
-            //string str1 = "GXTXAYB";
-            //string str2 = "AGGTAB";
+            //Console.WriteLine("Введите длину строк: ");
+            //int length = Convert.ToInt32(Console.ReadLine());
+            //string str1 = GenerateRandomString(length);
+            //string str2 = GenerateRandomString(length);
 
 
             //string lcs = LongestCommonSubsequence(str1, str2);
             //Console.WriteLine("====================================");
             //Console.WriteLine($"Наибольшая общая последовательность: {lcs}");
 
-            stopwatch.Stop();
-            TimeSpan elapsedTime = stopwatch.Elapsed;
-            Console.WriteLine("Прошедшее время: " + elapsedTime);
+            //stopwatch.Stop();
+            //TimeSpan elapsedTime = stopwatch.Elapsed;
+            //Console.WriteLine("Прошедшее время: " + elapsedTime);
             //int[] array = new int[5] { 6, 1, 12, 41, 2 };
             //PrintArray(array);
             //InsertSort(array);
